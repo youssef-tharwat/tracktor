@@ -1,5 +1,7 @@
 <template>
-  <wizard></wizard>
+  <div id="app" class="font-sans h-60 w-full flex flex-col container">
+    <wizard></wizard>
+  </div>
 </template>
 
 <script>
@@ -10,10 +12,3 @@ export default {
   components: { Wizard }
 };
 </script>
-
-<style>
-html {
-  width: 400px;
-  height: 400px;
-}
-</style>

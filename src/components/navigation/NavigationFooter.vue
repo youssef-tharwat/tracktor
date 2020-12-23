@@ -1,12 +1,21 @@
 <template>
-  <b-progress :value="value"></b-progress>
+  <div class="shadow-sm round bg-gray-50 p-3">
+    <b-progress :value="currentStep" size="is-small" show-value>
+      {{ currentStepText }}
+    </b-progress>
+  </div>
 </template>
 
 <script>
 export default {
   name: "NavigationFooter",
-  props: {
-    value: { type: Number, default: 0, required: true }
+  computed: {
+    currentStep() {
+      return 20;
+    },
+    currentStepText() {
+      return "1 / 4";
+    }
   }
 };
 </script>
