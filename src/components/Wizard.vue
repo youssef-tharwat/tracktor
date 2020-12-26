@@ -5,7 +5,6 @@
       <component :is="getCurrentStep.component"></component>
     </div>
     <navigation-footer
-      :text="getProgressBarValue"
       :value="getCurrentStep.percentage"
     ></navigation-footer>
   </div>
