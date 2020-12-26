@@ -1,12 +1,20 @@
 <template>
-  <div class="flex items-center shadow-sm round bg-gray-50 p-3">
+  <div class="flex items-center shadow-sm round bg-gray-100 p-3">
     <div class="flex items-center">
       <div class="has-text-dark text-lg mr-2 font-normal">Tracktor</div>
     </div>
     <div class="ml-auto flex items-center">
       <div class="flex items-center">
-        <button-arrow left @click="back" v-if="getCanGoBack"></button-arrow>
-        <button-arrow right @click="next" v-if="getCanGoNext"></button-arrow>
+        <button-arrow
+          left
+          @click.native="back"
+          v-if="getCanGoBack"
+        ></button-arrow>
+        <button-arrow
+          right
+          @click.native="next"
+          v-if="getCanGoNext"
+        ></button-arrow>
       </div>
     </div>
   </div>

@@ -6,7 +6,7 @@
     </div>
     <navigation-footer
       :text="getProgressBarValue"
-      :value="getCurrentStep.step"
+      :value="getCurrentStep.percentage"
     ></navigation-footer>
   </div>
 </template>

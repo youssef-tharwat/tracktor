@@ -32,7 +32,8 @@ export default new Vuex.Store({
           /* webpackChunkName: "step-selection" */ import(
             "@/components/step/selection/StepSelection"
           ),
-        step: 0
+        step: 1,
+        percentage: 33
       },
       {
         name: "step-value-tracking",
@@ -40,7 +41,8 @@ export default new Vuex.Store({
           /* webpackChunkName: "step-value-tracking" */ import(
             "@/components/step/method/value-tracking/StepValueTracking"
           ),
-        step: 1
+        step: 2,
+        percentage: 66
       },
       {
         name: "step-setting",
@@ -48,10 +50,11 @@ export default new Vuex.Store({
           /* webpackChunkName: "step-setting" */ import(
             "@/components/step/setting/StepSetting"
           ),
-        step: 2
+        step: 3,
+        percentage: 100
       }
     ],
-    step: 0
+    step: 1
   },
   mutations: {
     SET_NEXT_STEP(state) {
@@ -59,11 +62,22 @@ export default new Vuex.Store({
     },
     SET_PREVIOUS_STEP(state) {
       --state.step;
+    },
+    SET_URL(state, data) {
+      state.payload.url = data;
+    },
+    SET_METHOD_SCREENSHOT(state) {
+      state.payload.method.screenshot.active = true;
+      state.payload.method.valueTracking.active = false;
+    },
+    SET_METHOD_VALUE_TRACKING(state) {
+      state.payload.method.valueTracking.active = true;
+      state.payload.method.screenshot.active = false;
     }
   },
   actions: {},
   getters: {
-    getCurrentStep: state => state.steps[state.step],
+    getCurrentStep: state => state.steps[state.step - 1],
     getCanGoNext: state => {
       const URL = !!state.payload.url;
       const METHOD =
@@ -73,22 +87,22 @@ export default new Vuex.Store({
       const VALUE_TRACKING = !!state.payload.method.valueTracking.values.length;
 
       switch (state.step) {
-        case 0:
-          return URL && METHOD;
         case 1:
-          return VALUE_TRACKING;
+          return URL && METHOD;
         case 2:
+          return VALUE_TRACKING;
+        case 3:
           return false;
       }
     },
-    getCanGoBack: state => state.step > 0,
+    getCanGoBack: state => state.step > 1,
     getCanSend: state => {
       const USER_CONFIGURATION =
         state.payload.userConfiguration.email &&
         state.payload.userConfiguration.duration &&
         state.payload.userConfiguration.frequency;
-      return state.step === 2 && USER_CONFIGURATION;
+      return state.step === 3 && USER_CONFIGURATION;
     },
-    getProgressBarValue: state => `${state.step} / 2`
+    getProgressBarValue: state => `${state.step} / ${state.steps.length}`
   }
 });

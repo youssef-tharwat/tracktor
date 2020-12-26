@@ -1,5 +1,5 @@
 <template>
-  <div class="shadow-sm round bg-gray-50 p-3">
+  <div class="shadow-sm round bg-gray-100 p-3">
     <b-progress :value="value" size="is-small" show-value>
       {{ text }}
     </b-progress>

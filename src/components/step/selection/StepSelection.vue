@@ -4,6 +4,8 @@
       class="flex flex-col items-center justify-center text-center
       text-sm font-normal border border-gray-200 hover:shadow-inner
        w-28 h-20 rounded cursor-pointer p-3"
+      @click="$store.commit('SET_METHOD_VALUE_TRACKING')"
+      :class="valueTrackingIsActive"
     >
       <svg class="svg-icon flex-shrink-0" viewBox="0 0 20 20">
         <path
@@ -16,6 +18,8 @@
       class="flex flex-col items-center justify-center text-center
       text-sm font-normal border border-gray-200 hover:shadow-inner
        w-28 h-20 rounded cursor-pointer p-3"
+      @click="$store.commit('SET_METHOD_SCREENSHOT')"
+      :class="screenShotIsActive"
     >
       <svg class="svg-icon flex-shrink-0" viewBox="0 0 20 20">
         <path
@@ -29,6 +33,28 @@
 
 <script>
 export default {
-  name: "StepSelection"
+  name: "StepSelection",
+  computed: {
+    valueTrackingIsActive() {
+      return this.$store.state.payload.method.valueTracking.active
+        ? "shadow-inner"
+        : "shadow-none";
+    },
+    screenShotIsActive() {
+      return this.$store.state.payload.method.screenshot.active
+        ? "shadow-inner"
+        : "shadow-none";
+    }
+  },
+  methods: {
+    getCurrentPageUrl() {
+      chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+        this.$store.commit("SET_URL", tabs[0]);
+      });
+    }
+  },
+  mounted() {
+    this.getCurrentPageUrl();
+  }
 };
 </script>
