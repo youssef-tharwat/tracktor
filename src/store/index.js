@@ -63,7 +63,7 @@ export default new Vuex.Store({
         percentage: 100
       }
     ],
-    step: 0
+    step: 1
   },
   mutations: {
     SET_NEXT_STEP(state) {

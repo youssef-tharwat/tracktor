@@ -1,12 +1,10 @@
 <template>
   <div class="h-full flex flex-col justify-between">
     <navigation-header></navigation-header>
-    <div class="wizard-content p-3">
+    <div class="h-full wizard-content p-3">
       <component :is="getCurrentStep.component"></component>
     </div>
-    <navigation-footer
-      :value="getCurrentStep.percentage"
-    ></navigation-footer>
+    <navigation-footer :value="getCurrentStep.percentage"></navigation-footer>
   </div>
 </template>
 

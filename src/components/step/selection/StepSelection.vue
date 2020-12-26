@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-around">
+  <div class="flex items-center justify-around h-full">
     <div
       class="flex flex-col items-center justify-center text-center
       text-sm font-normal border border-gray-200 hover:shadow-inner

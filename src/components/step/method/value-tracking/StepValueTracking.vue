@@ -1,9 +1,11 @@
-<template> <h2>Value tracking</h2> </template>
+<template>
+  <value-tracking-list></value-tracking-list>
+</template>
 
 <script>
+import ValueTrackingList from "@/components/step/method/value-tracking/ValueTrackingList";
 export default {
-  name: "StepValueTracking"
+  name: "StepValueTracking",
+  components: { ValueTrackingList }
 };
 </script>
-
-<style scoped></style>
