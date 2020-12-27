@@ -26,18 +26,17 @@ const REMOVE_ELEMENT_STYLING = element => {
   element.classList.remove("tracktor-element-highlighted");
 };
 
-const HANDLE_ELEMENT_CLICK = element => {
-  ELEMENT_SCAN_STOP();
-  element.removeEventListener("click", () => {});
-  console.log(element);
-  return element;
-};
-
 export const ELEMENT_SCAN_INIT = async () => {
   let globalElement = {
     el: null,
     style: "",
     value: ""
+  };
+
+  const HANDLE_ELEMENT_CLICK = () => {
+    ELEMENT_SCAN_STOP();
+    globalElement.el.removeEventListener("click", HANDLE_ELEMENT_CLICK);
+    return globalElement;
   };
 
   document.onmousemove = debounce(e => {
@@ -51,7 +50,7 @@ export const ELEMENT_SCAN_INIT = async () => {
       // Remove styling & delete click listener from previously hovered element if it exists
       if (globalElement.el) {
         REMOVE_ELEMENT_STYLING(globalElement.el);
-        globalElement.el.removeEventListener("click", () => {});
+        globalElement.el.removeEventListener("click", HANDLE_ELEMENT_CLICK);
       }
 
       // New element is being hovered
@@ -65,10 +64,7 @@ export const ELEMENT_SCAN_INIT = async () => {
 
       SET_ELEMENT_STYLING(globalElement.el);
 
-      globalElement.el.addEventListener("click", () => {
-        HANDLE_ELEMENT_CLICK(globalElement.el);
-        return globalElement.el;
-      });
+      globalElement.el.addEventListener("click", HANDLE_ELEMENT_CLICK);
     }
   }, 15);
 };

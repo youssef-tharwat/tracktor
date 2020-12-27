@@ -11,7 +11,8 @@ export default {
   name: "SwitchTracking",
   data() {
     return {
-      isSwitched: false
+      isSwitched: false,
+      payload: {}
     };
   },
   watch: {
