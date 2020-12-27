@@ -14,7 +14,7 @@ const GET_ELEMENT_MOUSE_OVER = (x, y) => {
 const GET_ELEMENT_MOUSE_OVER_VALUES = element => {
   return {
     style: window.getComputedStyle(element),
-    value: element.value
+    value: element.innerText
   };
 };
 

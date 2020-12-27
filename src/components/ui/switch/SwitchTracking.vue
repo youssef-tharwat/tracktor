@@ -16,10 +16,11 @@ export default {
     };
   },
   watch: {
-    isSwitched(value) {
+    async isSwitched(value) {
       if (value) {
-        ELEMENT_SCAN_INIT(async element => {
+        await ELEMENT_SCAN_INIT(async element => {
           this.payload = await element;
+          console.log(this.payload);
         });
       } else {
         ELEMENT_SCAN_STOP();
