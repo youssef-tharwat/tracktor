@@ -22,13 +22,17 @@
         </b-select>
       </b-field>
     </div>
-    <div></div>
+    <div class="ml-2">
+      <switch-tracking></switch-tracking>
+    </div>
   </div>
 </template>
 
 <script>
+import SwitchTracking from "@/components/ui/switch/SwitchTracking";
 export default {
   name: "ValueTrackingRow",
+  components: { SwitchTracking },
   props: {
     payload: { type: Object, required: true },
     selectedValue: { type: Object, required: true }

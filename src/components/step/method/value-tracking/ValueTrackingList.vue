@@ -16,7 +16,7 @@
     <div class="py-3">
       <div class="flex flex-col overflow-y-auto h-32">
         <value-tracking-row
-          class="mb-2 mr-2"
+          class="mb-2"
           v-for="(item, index) in valueTrackingList"
           :key="index"
           :payload="item.payload"
