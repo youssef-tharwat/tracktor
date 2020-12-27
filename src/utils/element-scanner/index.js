@@ -26,7 +26,7 @@ const REMOVE_ELEMENT_STYLING = element => {
   element.classList.remove("tracktor-element-highlighted");
 };
 
-export const ELEMENT_SCAN_INIT = async () => {
+export const ELEMENT_SCAN_INIT = async _callback => {
   let globalElement = {
     el: null,
     style: "",
@@ -36,7 +36,7 @@ export const ELEMENT_SCAN_INIT = async () => {
   const HANDLE_ELEMENT_CLICK = () => {
     ELEMENT_SCAN_STOP();
     globalElement.el.removeEventListener("click", HANDLE_ELEMENT_CLICK);
-    return globalElement;
+    _callback(globalElement);
   };
 
   document.onmousemove = debounce(e => {

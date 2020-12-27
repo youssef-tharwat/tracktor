@@ -17,7 +17,13 @@ export default {
   },
   watch: {
     isSwitched(value) {
-      value ? ELEMENT_SCAN_INIT() : ELEMENT_SCAN_STOP();
+      if (value) {
+        ELEMENT_SCAN_INIT(async element => {
+          this.payload = await element;
+        });
+      } else {
+        ELEMENT_SCAN_STOP();
+      }
     }
   }
 };
