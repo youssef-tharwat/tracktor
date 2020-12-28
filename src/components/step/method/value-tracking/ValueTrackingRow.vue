@@ -18,24 +18,25 @@
             :value="option"
             :key="index"
           >
-            {{ option }}
+            {{ startCaseFilter(option) }}
           </option>
         </b-select>
       </b-field>
-    </div>
-    <div class="ml-2">
-      <switch-tracking></switch-tracking>
     </div>
   </div>
 </template>
 
 <script>
-import SwitchTracking from "@/components/ui/switch/SwitchTracking";
+import startCase from "lodash/startCase";
 export default {
   name: "ValueTrackingRow",
-  components: { SwitchTracking },
   props: {
     element: { type: Object, required: true }
+  },
+  methods: {
+    startCaseFilter(text) {
+      return startCase(text);
+    }
   }
 };
 </script>

@@ -4,9 +4,12 @@
       <div class="ml-auto flex items-center">
         <button-remove
           class="mr-1"
-          v-if="valueTrackingList.length > 1"
+          v-if="valueTrackingList.length > 0"
           @click.native="handleRemoveRow"
         ></button-remove>
+        <div v-if="valueTrackingList.length === 0" class="mr-2">
+          <div class="text-sm font-medium">Start tracking</div>
+        </div>
         <button-add
           v-if="valueTrackingList.length <= 5"
           @click.native="handleAddRow"
@@ -30,6 +33,8 @@
 import ButtonAdd from "@/components/ui/button/ButtonAdd";
 import ValueTrackingRow from "@/components/step/method/value-tracking/ValueTrackingRow";
 import ButtonRemove from "@/components/ui/button/ButtonRemove";
+import { ELEMENT_SCAN_INIT } from "@/utils/element-scanner";
+
 export default {
   name: "ValueTrackingList",
   components: { ButtonRemove, ValueTrackingRow, ButtonAdd },
@@ -38,15 +43,15 @@ export default {
       return this.$store.getters["getValueTrackingList"];
     }
   },
-  data() {
-    return {};
-  },
   methods: {
-    handleAddRow() {
-      this.$store.dispatch("ADD_VALUE_TRACKING_ROW");
+    async handleAddRow() {
+      await ELEMENT_SCAN_INIT(async element => {
+        const response = await element;
+        this.$store.commit("ADD_VALUE_TRACKING_ROW", response);
+      });
     },
     handleRemoveRow() {
-      this.$store.dispatch("REMOVE_VALUE_TRACKING_ROW");
+      this.$store.commit("REMOVE_VALUE_TRACKING_ROW");
     }
   }
 };

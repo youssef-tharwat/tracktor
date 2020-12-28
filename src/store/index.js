@@ -13,7 +13,7 @@ export default new Vuex.Store({
         },
         valueTracking: {
           active: false,
-          values: [{ value: "", styleOptions: "", styleSelected: "" }]
+          values: []
         }
       },
       userConfiguration: {
