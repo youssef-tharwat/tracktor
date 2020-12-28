@@ -20,7 +20,7 @@ export default {
       if (value) {
         await ELEMENT_SCAN_INIT(async element => {
           this.payload = await element;
-          console.log(this.payload);
+          this.$store.commit("ADD_VALUE_TRACKING_ROW", this.payload);
         });
       } else {
         ELEMENT_SCAN_STOP();

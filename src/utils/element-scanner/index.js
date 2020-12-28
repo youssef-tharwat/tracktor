@@ -1,4 +1,5 @@
 import debounce from "lodash/debounce";
+import pick from "lodash/pick";
 
 const GET_MOUSE_LOCATION = e => {
   return {
@@ -12,8 +13,25 @@ const GET_ELEMENT_MOUSE_OVER = (x, y) => {
 };
 
 const GET_ELEMENT_MOUSE_OVER_VALUES = element => {
+  const ELEMENT_STYLES_REQUIRED = [
+    "color",
+    "backgroundColor",
+    "textDecoration",
+    "textAlign",
+    "fontSize",
+    "fontFamily",
+    "fontStyle",
+    "fontWeight",
+    "fontVariant",
+    "border",
+    "borderColor"
+  ];
   return {
-    style: window.getComputedStyle(element),
+    styleOptions: pick(
+      window.getComputedStyle(element),
+      ELEMENT_STYLES_REQUIRED
+    ),
+    styleSelected: "",
     value: element.innerText
   };
 };
@@ -29,7 +47,8 @@ const REMOVE_ELEMENT_STYLING = element => {
 export const ELEMENT_SCAN_INIT = async _callback => {
   let globalElement = {
     el: null,
-    style: "",
+    styleOptions: "",
+    styleSelected: "",
     value: ""
   };
 
@@ -55,9 +74,9 @@ export const ELEMENT_SCAN_INIT = async _callback => {
 
       // New element is being hovered
       globalElement.el = localElement.el;
-      globalElement.style = GET_ELEMENT_MOUSE_OVER_VALUES(
+      globalElement.styleOptions = GET_ELEMENT_MOUSE_OVER_VALUES(
         localElement.el
-      ).style;
+      ).styleOptions;
       globalElement.value = GET_ELEMENT_MOUSE_OVER_VALUES(
         localElement.el
       ).value;

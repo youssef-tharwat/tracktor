@@ -5,7 +5,8 @@
         <b-input
           size="is-small"
           type="is-dark"
-          :value="payload.cssSelector.text"
+          :value="element.value"
+          disabled
         ></b-input>
       </b-field>
     </div>
@@ -13,7 +14,7 @@
       <b-field label="Attributes" label-position="inside">
         <b-select size="is-small" expanded>
           <option
-            v-for="(option, index) in selectedValue.availableCssAttributes"
+            v-for="(option, index) in Object.keys(element.styleOptions)"
             :value="option"
             :key="index"
           >
@@ -34,8 +35,7 @@ export default {
   name: "ValueTrackingRow",
   components: { SwitchTracking },
   props: {
-    payload: { type: Object, required: true },
-    selectedValue: { type: Object, required: true }
+    element: { type: Object, required: true }
   }
 };
 </script>

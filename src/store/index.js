@@ -13,10 +13,7 @@ export default new Vuex.Store({
         },
         valueTracking: {
           active: false,
-          values: [
-            { cssSelector: "", cssAttribute: "" },
-            { cssSelector: "", cssAttribute: "" }
-          ]
+          values: [{ value: "", styleOptions: "", styleSelected: "" }]
         }
       },
       userConfiguration: {
@@ -63,7 +60,12 @@ export default new Vuex.Store({
         percentage: 100
       }
     ],
-    step: 1
+    step: 1,
+    defaultValueTrackingRow: {
+      value: "",
+      styleOptions: "",
+      styleSelected: ""
+    }
   },
   mutations: {
     SET_NEXT_STEP(state) {
@@ -82,9 +84,22 @@ export default new Vuex.Store({
     SET_METHOD_VALUE_TRACKING(state) {
       state.payload.method.valueTracking.active = true;
       state.payload.method.screenshot.active = false;
+    },
+    ADD_VALUE_TRACKING_ROW(state, data) {
+      state.payload.method.valueTracking.values.push(data);
+    },
+    REMOVE_VALUE_TRACKING_ROW(state) {
+      state.payload.method.valueTracking.values.pop();
     }
   },
-  actions: {},
+  actions: {
+    ADD_VALUE_TRACKING_ROW({ state, commit }) {
+      commit("ADD_VALUE_TRACKING_ROW", state.defaultValueTrackingRow);
+    },
+    REMOVE_VALUE_TRACKING_ROW({ commit }) {
+      commit("REMOVE_VALUE_TRACKING_ROW");
+    }
+  },
   getters: {
     getCurrentStep: state => state.steps[state.step],
     getCanGoNext: state => {
@@ -111,6 +126,7 @@ export default new Vuex.Store({
         state.payload.userConfiguration.duration &&
         state.payload.userConfiguration.frequency;
       return state.step === 2 && USER_CONFIGURATION;
-    }
+    },
+    getValueTrackingList: state => state.payload.method.valueTracking.values
   }
 });

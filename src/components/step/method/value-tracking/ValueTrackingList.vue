@@ -19,8 +19,7 @@
           class="mb-2"
           v-for="(item, index) in valueTrackingList"
           :key="index"
-          :payload="item.payload"
-          :selectedValue="item.selectedValue"
+          :element="item"
         ></value-tracking-row>
       </div>
     </div>
@@ -34,42 +33,20 @@ import ButtonRemove from "@/components/ui/button/ButtonRemove";
 export default {
   name: "ValueTrackingList",
   components: { ButtonRemove, ValueTrackingRow, ButtonAdd },
+  computed: {
+    valueTrackingList() {
+      return this.$store.getters["getValueTrackingList"];
+    }
+  },
   data() {
-    return {
-      valueTrackingList: [
-        {
-          payload: {
-            cssSelector: {
-              value: "",
-              text: ""
-            },
-            cssAttribute: ""
-          },
-          selectedValue: {
-            availableCssAttributes: []
-          }
-        }
-      ],
-      defaultValueTrackingRow: {
-        payload: {
-          cssSelector: {
-            value: "",
-            text: ""
-          },
-          cssAttribute: ""
-        },
-        selectedValue: {
-          availableCssAttributes: []
-        }
-      }
-    };
+    return {};
   },
   methods: {
     handleAddRow() {
-      this.valueTrackingList.push(this.defaultValueTrackingRow);
+      this.$store.dispatch("ADD_VALUE_TRACKING_ROW");
     },
     handleRemoveRow() {
-      this.valueTrackingList.pop();
+      this.$store.dispatch("REMOVE_VALUE_TRACKING_ROW");
     }
   }
 };
