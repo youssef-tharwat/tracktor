@@ -17,9 +17,12 @@
       </div>
     </div>
     <div class="py-3">
-      <div class="flex flex-col overflow-y-auto h-32">
+      <div
+        class="flex flex-col overflow-y-auto h-32 pt-3"
+        v-if="valueTrackingList"
+      >
         <value-tracking-row
-          class="mb-2"
+          class="mb-4"
           v-for="(item, index) in valueTrackingList"
           :key="index"
           :element="item"

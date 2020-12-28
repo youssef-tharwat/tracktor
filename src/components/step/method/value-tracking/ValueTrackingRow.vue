@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center">
     <div class="flex-1">
-      <b-field label="Value" label-position="inside">
+      <b-field label="Value" label-position="on-border">
         <b-input
           size="is-small"
           type="is-dark"
@@ -11,7 +11,7 @@
       </b-field>
     </div>
     <div class="flex-1 ml-2">
-      <b-field label="Attributes" label-position="inside">
+      <b-field label="Attributes" label-position="on-border">
         <b-select size="is-small" expanded>
           <option
             v-for="(option, index) in Object.keys(element.styleOptions)"
