@@ -21,5 +21,11 @@
       "19": "icons/19.png",
       "38": "icons/38.png"
     }
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["js/content-script.js"]
+    }
+  ]
 }

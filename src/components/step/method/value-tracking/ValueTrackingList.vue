@@ -36,7 +36,7 @@
 import ButtonAdd from "@/components/ui/button/ButtonAdd";
 import ValueTrackingRow from "@/components/step/method/value-tracking/ValueTrackingRow";
 import ButtonRemove from "@/components/ui/button/ButtonRemove";
-import { ELEMENT_SCAN_INIT } from "@/utils/element-scanner";
+import { sendAddRowMessage } from "@/background";
 
 export default {
   name: "ValueTrackingList",
@@ -47,11 +47,8 @@ export default {
     }
   },
   methods: {
-    async handleAddRow() {
-      await ELEMENT_SCAN_INIT(async element => {
-        const response = await element;
-        this.$store.commit("ADD_VALUE_TRACKING_ROW", response);
-      });
+    handleAddRow() {
+      sendAddRowMessage();
     },
     handleRemoveRow() {
       this.$store.commit("REMOVE_VALUE_TRACKING_ROW");

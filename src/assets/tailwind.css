@@ -18,7 +18,3 @@
   stroke: currentColor;
   stroke-width: 1;
 }
-
-.tracktor-element-highlighted {
-  border: 1px solid red;
-}

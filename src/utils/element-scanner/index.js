@@ -38,9 +38,12 @@ const GET_ELEMENT_MOUSE_OVER_VALUES = element => {
 
 const SET_ELEMENT_STYLING = element => {
   element.classList.add("tracktor-element-highlighted");
+  element.style["border"] = "1px solid red";
 };
 
 const REMOVE_ELEMENT_STYLING = element => {
+  if (element.classList.contains("tracktor-element-highlighted"))
+    element.style["border"] = "unset";
   element.classList.remove("tracktor-element-highlighted");
 };
 
