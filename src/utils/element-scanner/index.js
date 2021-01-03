@@ -47,7 +47,7 @@ const REMOVE_ELEMENT_STYLING = element => {
   element.classList.remove("tracktor-element-highlighted");
 };
 
-export const ELEMENT_SCAN_INIT = async _callback => {
+export const ELEMENT_SCAN_INIT = _callback => {
   let globalElement = {
     el: null,
     styleOptions: "",

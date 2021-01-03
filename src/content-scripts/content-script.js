@@ -1,15 +1,26 @@
 import { ELEMENT_SCAN_INIT } from "@/utils/element-scanner";
 import store from "@/store/index";
 
-// chrome.runtime.onMessage.addListener(handleAddRow);
+export const ADD_ROW = "ADD_ROW";
+export const DELETE_ROW = "DELETE_ROW";
 
-async function handleAddRow() {
-  // console.log(message, sender, sendResponse);
-  await ELEMENT_SCAN_INIT(async element => {
-    const response = await element;
-    store.commit("ADD_VALUE_TRACKING_ROW", response);
-    console.log(response);
-  });
-}
+const scriptActions = {
+  [ADD_ROW]: _callBack => {
+    ELEMENT_SCAN_INIT(element => {
+      _callBack(element);
+      store.commit("ADD_VALUE_TRACKING_ROW", element);
+    });
+  }
+};
 
-handleAddRow().then(res => console.log(res));
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+  if (message.from !== "background") {
+    return false;
+  }
+
+  if (message.action === ADD_ROW) {
+    scriptActions.ADD_ROW(element => {
+      sendResponse(element);
+    });
+  }
+});

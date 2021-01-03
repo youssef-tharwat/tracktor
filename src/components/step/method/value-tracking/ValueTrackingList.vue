@@ -36,7 +36,7 @@
 import ButtonAdd from "@/components/ui/button/ButtonAdd";
 import ValueTrackingRow from "@/components/step/method/value-tracking/ValueTrackingRow";
 import ButtonRemove from "@/components/ui/button/ButtonRemove";
-import { sendAddRowMessage } from "@/background";
+import { ADD_ROW } from "@/content-scripts/content-script";
 
 export default {
   name: "ValueTrackingList",
@@ -48,7 +48,11 @@ export default {
   },
   methods: {
     handleAddRow() {
-      sendAddRowMessage();
+      chrome.runtime.sendMessage({
+        //send a message to the background script
+        from: "popup",
+        action: ADD_ROW
+      });
     },
     handleRemoveRow() {
       this.$store.commit("REMOVE_VALUE_TRACKING_ROW");
