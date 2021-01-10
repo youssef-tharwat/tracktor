@@ -3,6 +3,7 @@ import store from "@/store/index";
 
 export const ADD_ROW = "ADD_ROW";
 export const DELETE_ROW = "DELETE_ROW";
+const CURRENT_ELEMENTS = store.getters["getValueTrackingList"];
 
 const scriptActions = {
   [ADD_ROW]: _callBack => {
@@ -19,7 +20,11 @@ chrome.runtime.onMessage.addListener(function(message) {
 
   if (message.action === ADD_ROW) {
     scriptActions.ADD_ROW(element => {
-      store.commit("ADD_VALUE_TRACKING_ROW", element);
+      CURRENT_ELEMENTS.push(element);
+      localStorage.setItem(
+        "tracktorElements",
+        JSON.stringify(CURRENT_ELEMENTS)
+      );
     });
   }
 });

@@ -13,7 +13,7 @@ export default new Vuex.Store({
         },
         valueTracking: {
           active: false,
-          values: []
+          values: localStorage.getItem("tracktorElements") || []
         }
       },
       userConfiguration: {
@@ -127,6 +127,7 @@ export default new Vuex.Store({
         state.payload.userConfiguration.frequency;
       return state.step === 2 && USER_CONFIGURATION;
     },
-    getValueTrackingList: state => state.payload.method.valueTracking.values
+    getValueTrackingList: state =>
+      JSON.parse(JSON.stringify(state.payload.method.valueTracking.values))
   }
 });
