@@ -7,20 +7,19 @@ export const DELETE_ROW = "DELETE_ROW";
 const scriptActions = {
   [ADD_ROW]: _callBack => {
     ELEMENT_SCAN_INIT(element => {
-      _callBack(element);
-      store.commit("ADD_VALUE_TRACKING_ROW", element);
+      return _callBack(element);
     });
   }
 };
 
-chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function(message) {
   if (message.from !== "background") {
     return false;
   }
 
   if (message.action === ADD_ROW) {
     scriptActions.ADD_ROW(element => {
-      sendResponse(element);
+      store.commit("ADD_VALUE_TRACKING_ROW", element);
     });
   }
 });
